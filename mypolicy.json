@@ -1,0 +1,36 @@
+{
+  "issuerParameters": {
+    "name": "Self"
+  },
+  "keyProperties": {
+    "exportable": true,
+    "keySize": 2048,
+    "keyType": "RSA",
+    "reuseKey": true
+  },
+  "lifetimeActions": [
+    {
+      "action": {
+        "actionType": "AutoRenew"
+      },
+      "trigger": {
+        "daysBeforeExpiry": 90
+      }
+    }
+  ],
+  "secretProperties": {
+    "contentType": "application/x-pkcs12"
+  },
+  "x509CertificateProperties": {
+    "keyUsage": [
+      "cRLSign",
+      "dataEncipherment",
+      "digitalSignature",
+      "keyEncipherment",
+      "keyAgreement",
+      "keyCertSign"
+    ],
+    "subject": "CN=mycluster.southcentralus.cloudapp.azure.com",
+    "validityInMonths": 12
+  }
+}
