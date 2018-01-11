@@ -41,3 +41,9 @@ thumbprint=`az keyvault certificate show -n $key_vault_secret_name --vault-name 
 key_vault_id=`az keyvault show -n $key_vault_name | jq '. | .id'`
 
 printf "Certificate created\n Source Vault Resource Id: $key_vault_id\n Certificate URL: $secret_url\n Certificate Thumbprint: $thumbprint\n\n"
+
+printf "To download the certificate as .pfx run the following:\naz keyvault secret download --vault-name $key_vault_name -n $key_vault_secret_name -e base64 -f $key_vault_secret_name.pfx\n\n"
+
+printf "For Linux, convert to .pem (password here is blank, use a password in production):\nopenssl pkcs12 -in $key_vault_secret_name.pfx -out output.pem -nodes\n\n"
+
+printf "To import the pfx in Windows using PowerShell:\nImport-PfxCertificate .\\$key_vault_secret_name.pfx -CertStoreLocation Cert:\\CurrentUser\\My\\"
