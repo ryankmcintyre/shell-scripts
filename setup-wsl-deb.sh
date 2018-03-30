@@ -1,8 +1,8 @@
 #!/bin/bash
 
 
-VIM_DIR=~/.vim/colors		# vim directory
-LIST_OF_APPS="git tmux curl"	# programs to install
+VIM_DIR=~/.vim/colors			# vim directory
+LIST_OF_APPS="git tmux curl vim"	# programs to install
 
 sudo apt-get update
 sudo apt-get dist-upgrade -y
