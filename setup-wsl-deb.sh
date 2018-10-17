@@ -31,4 +31,24 @@ echo -n ""
 curl https://raw.githubusercontent.com/morhetz/gruvbox/master/colors/gruvbox.vim > $VIM_DIR/gruvbox.vim
 echo "done"
 
- 
+#########
+
+# az cli
+echo -n "Installing Azure CLI"
+echo -n ""
+AZ_REPO=$(lsb_release -cs)
+echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
+    sudo tee /etc/apt/sources.list.d/azure-cli.list
+curl -L https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install -y apt-transport-https azure-cli 
+echo -n ""
+
+# kubectl cli
+echo -n "Installing kubectl CLI"
+echo -n ""
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubectl
+echo "done"
