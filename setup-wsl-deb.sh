@@ -2,7 +2,7 @@
 
 
 VIM_DIR=~/.vim/colors			# vim directory
-LIST_OF_APPS="git tmux curl vim jq xclip" 	# programs to install
+LIST_OF_APPS="git tmux curl vim jq gnupg-agent" 	# programs to install
 
 sudo apt-get update
 sudo apt-get dist-upgrade -y
@@ -43,6 +43,33 @@ curl -L https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 sudo apt-get update
 sudo apt-get install -y apt-transport-https azure-cli 
 echo -n ""
+
+# docker
+echo -n "Installing docker"
+echo -n ""
+echo -n "Adding Docker's GPG Key"
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+echo -n "Adding Docker stable repository"
+sudo add-apt-repository \
+    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) \
+    stable"
+echo -n "Installing Docker CE"
+sudo apt-get update
+if grep -q Microsoft /proc/version; then
+    # This is WSL1 on Windows
+    echo -n "WSL1, installing docker-ce only"
+    sudo apt-get install -y docker-ce
+else
+    # Either WSL2 or straight Linux and we can install full docker
+    echo -n "WSL2 or straight Linux, installing full Docker"
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+    sudo systemctl enable docker
+    echo -n "Starting docker service"
+    sudo service docker start
+fi
+sudo usermod -aG docker $USER
+echo -n "Done with Docker, need to logout and back in for new docker permissions to be reflected"
 
 # kubectl cli
 echo -n "Installing kubectl CLI"
