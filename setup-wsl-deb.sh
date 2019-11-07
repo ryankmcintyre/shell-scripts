@@ -63,8 +63,10 @@ if grep -q Microsoft /proc/version; then
 else
     # Either WSL2 or straight Linux and we can install full docker
     echo -n "WSL2 or straight Linux, installing full Docker"
-    sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-    sudo systemctl enable docker
+    #sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+    #sudo systemctl enable docker
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sh get-docker.sh
     echo -n "Starting docker service"
     sudo service docker start
 fi
