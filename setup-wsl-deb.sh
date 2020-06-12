@@ -60,6 +60,8 @@ if grep -q Microsoft /proc/version; then
     # This is WSL1 on Windows
     echo -n "WSL1, installing docker-ce only"
     sudo apt-get install -y docker-ce
+    sudo usermod -aG docker $USER
+    echo -n "Done with Docker, need to logout and back in for new docker permissions to be reflected"
 elif grep -q microsoft /proc/version; then
     # This is WSL2 on Windows
     echo -n "WSL2, skipping Docker install assuming Docker for Windows will be used."
@@ -72,9 +74,9 @@ else
     sh get-docker.sh
     echo -n "Starting docker service"
     sudo service docker start
+    sudo usermod -aG docker $USER
+    echo -n "Done with Docker, need to logout and back in for new docker permissions to be reflected"
 fi
-sudo usermod -aG docker $USER
-echo -n "Done with Docker, need to logout and back in for new docker permissions to be reflected"
 
 # kubectl cli
 echo -n "Installing kubectl CLI"
