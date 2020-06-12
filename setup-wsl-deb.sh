@@ -60,9 +60,12 @@ if grep -q Microsoft /proc/version; then
     # This is WSL1 on Windows
     echo -n "WSL1, installing docker-ce only"
     sudo apt-get install -y docker-ce
+elif grep -q microsoft /proc/version; then
+    # This is WSL2 on Windows
+    echo -n "WSL2, skipping Docker install assuming Docker for Windows will be used."
 else
-    # Either WSL2 or straight Linux and we can install full docker
-    echo -n "WSL2 or straight Linux, installing full Docker"
+    # Straight Linux and we can install full docker
+    echo -n "Straight Linux, installing full Docker"
     #sudo apt-get install -y docker-ce docker-ce-cli containerd.io
     #sudo systemctl enable docker
     curl -fsSL https://get.docker.com -o get-docker.sh
