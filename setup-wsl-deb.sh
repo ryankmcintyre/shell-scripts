@@ -3,7 +3,7 @@
 echo "Installing tools"
 echo "----------"
 VIM_DIR=~/.vim/colors			# vim directory
-LIST_OF_APPS="git tmux curl vim jq gnupg-agent" 	# programs to install
+LIST_OF_APPS="git tmux curl vim jq gnupg-agent unzip" 	# programs to install
 
 sudo apt-get update
 sudo apt-get dist-upgrade -y
