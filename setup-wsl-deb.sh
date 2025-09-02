@@ -13,6 +13,9 @@ echo -e "done\n"
 
 ##########
 
+# Download and install oh-my-posh
+curl -s https://ohmyposh.dev/install.sh | bash -s
+
 # Git prompt
 echo "Getting git-prompt.sh"
 echo "----------"
